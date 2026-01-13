@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { Suspense } from 'react';
 
 import TitleHeader from '../components/TitleHeader';
-import { techStackIcons, techStackImgs } from '../constants';
+import { techStackImgs } from '../constants';
 
 const TechStack = () => {
     // Animate the tech cards in the skills section
