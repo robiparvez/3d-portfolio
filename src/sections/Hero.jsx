@@ -18,7 +18,7 @@ const Hero = () => {
     return (
         <section id='hero' className='relative overflow-hidden'>
             <div className='absolute top-0 left-0 z-10'>
-                <img src='/images/bg.png' alt='' />
+                <img src='/images/bg.png' alt='Abstract geometric background pattern' />
             </div>
 
             <div className='hero-layout'>
@@ -32,7 +32,7 @@ const Hero = () => {
                                     <span className='wrapper'>
                                         {loopedWords.map((word, index) => (
                                             <span key={index} className='flex items-center md:gap-3 gap-1 pb-2'>
-                                                <img src={word.imgPath} alt='person' className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50' loading={index > 3 ? 'lazy' : 'eager'} />
+                                                <img src={word.imgPath} alt={`${word.text} icon`} className='xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50' loading={index > 3 ? 'lazy' : 'eager'} />
                                                 <span>{word.text}</span>
                                             </span>
                                         ))}

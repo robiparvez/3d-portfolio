@@ -10,29 +10,33 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     'react-vendor': ['react', 'react-dom'],
-                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+                    'three-core': ['three'],
+                    'three-fiber': ['@react-three/fiber'],
+                    'three-helpers': ['@react-three/drei'],
                     'animation-vendor': ['gsap', '@gsap/react']
                 }
+            },
+            onwarn(warning, warn) {
+                if (warning.code === 'EVAL' && warning.id?.includes('three-stdlib/libs/lottie.js')) {
+                    return;
+                }
+                warn(warning);
             }
         },
         chunkSizeWarningLimit: 1000,
-        // Enable minification
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true, // Remove console.logs in production
-                drop_debugger: true
-            }
+        minify: 'esbuild',
+        target: 'esnext',
+        modulePreload: {
+            polyfill: false
         }
     },
     optimizeDeps: {
-        include: ['react', 'react-dom', 'three', '@react-three/fiber', '@react-three/drei'],
-        exclude: ['@react-three/postprocessing'] // Lazy load postprocessing
+        include: ['react', 'react-dom', 'three', '@react-three/fiber'],
+        exclude: ['@react-three/postprocessing']
     },
     server: {
-        // Enable compression
         hmr: {
-            overlay: false // Disable error overlay for better performance
+            overlay: false
         }
     }
 });
